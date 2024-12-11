@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App - Nutrition</title>
+    <link rel="stylesheet" href="styleNutrition.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="projecthome.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li> <!-- Adding Nutrition Tab -->
+                <li><a href="exercise-guide.html">Exercise Guide</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="nutrition">
+            <h1>Nutrition Tracker</h1>
+            <form>
+                <label for="food-name">Enter Food Name:</label>
+                <input type="text" id="food-name" name="food-name" placeholder="Rice, Chicken, Beef" required>
+                <button type="button" id="searchButton"> Search</button>
+            </form>
+            <div id="results"></div>
+            <p>Total Calories: <span id="total-calories">0</span></p>
+            <p class="small-note">Calories are contextual and varies person to person, keep in mind your goals and find the amount you require.</p>
+            <p class="small-note">You should also aim to consume 1 gram of protien per pound of bodyweight.</p>
+        </section>
+    </main>
+    <script src="foodAPI.js"></script>
+</body>
+</html>

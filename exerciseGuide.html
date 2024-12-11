@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercise Guide</title>
+        <link rel="stylesheet">
+
+    </head>
+    <body>    
+        <header>
+        <nav>
+            <ul>
+                <li><a href="projecthome.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="exercise-guide.html">Exercise Guide</a></li>
+            </ul>
+        </nav>
+    </header>
+
+        <h1>Customize Your Workout Guide by Muscle Group</h1>
+
+        <form id="workout-form">
+            <!-- Muscle Group Selection -->
+            <label>Muscle Group (Choose up to 2):</label><br>
+            <input type="checkbox" name="muscle-group" value="chest"> Chest<br>
+            <input type="checkbox" name="muscle-group" value="back"> Back<br>
+            <input type="checkbox" name="muscle-group" value="arms"> Arms<br>
+            <input type="checkbox" name="muscle-group" value="legs"> Legs<br>
+            <input type="checkbox" name="muscle-group" value="core"> Core<br>
+            <input type="checkbox" name="muscle-group" value="shoulders"> Shoulders<br>
+            <input type="checkbox" name="muscle-group" value="full-body"> Full Body<br>
+
+            <br>
+
+            <!-- Intensity Level Selection -->
+            <label for="intensity">Workout Intensity:</label>
+            <select id="intensity" name="intensity" required>
+                <option value="intensive">Intensive</option>
+                <option value="not-intensive">Not Intensive</option>
+            </select>
+
+            <br><br>
+         
+            <button type="button" onclick="generateWorkouts()">Get Workout</button>
+        </form>
+
+        <div id="workout"></div> 
+        <script src="workoutAPI.js"></script>        
+    </body>
+</html>
