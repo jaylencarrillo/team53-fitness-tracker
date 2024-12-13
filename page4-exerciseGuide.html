@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>Exercise Guide</title>
-    <link rel="stylesheet" href="onePage.css"> 
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>    
     <header>
@@ -36,54 +36,6 @@
 
     <div id="workout"></div> 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('button').addEventListener('click', generateWorkouts);
-        });
-
-        function generateWorkouts() {
-            let selectedMuscles = [];
-
-            document.querySelectorAll('input[name="muscle-group"]:checked').forEach(function(checkbox) {
-                selectedMuscles.push(checkbox.value);
-            });
-
-            if (selectedMuscles.length === 0) {
-                alert('Choose a muscle group');
-                return;
-            }
-
-            const workoutDiv = document.getElementById('workout');
-            workoutDiv.style.display = 'block';
-            workoutDiv.innerHTML = '<p> Loading exercises ....</p>';
-
-            // Makes the API call
-            fetch(`https://wger.de/api/v2/exercise/?muscles=${selectedMuscles.join(',')}&language=2`, {
-                headers: {
-                    'Authorization': '2ece34001acf803d853b48459bbb8c8194034207'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                workoutDiv.innerHTML = '';
-
-                // If no exercises are found, show a message
-                if (data.results.length === 0) {
-                    workoutDiv.innerHTML = '<p> No exercises match criteria</p>';
-                } else {
-                    // If there are matching exercises, display them
-                    data.results.forEach(function(exercise) {
-                        let exerciseDiv = document.createElement('div');
-                        exerciseDiv.classList.add('exercise-item');
-                        exerciseDiv.innerHTML = `
-                            <h3>${exercise.name}</h3>
-                            <p>${exercise.description || 'No description available.'}</p>
-                        `;
-                        workoutDiv.appendChild(exerciseDiv);
-                    });
-                }
-            })
-        }
-    </script>
+    <script src="workoutAPI.js"></script>
 </body>
 </html>

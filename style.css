@@ -253,3 +253,44 @@ form input[type="checkbox"] {
     margin-top: 20px;
 }
 
+#workout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.exercise-item {
+    background-color: whitesmoke;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.exercise-item:hover {
+    transform: translateY(-10px);
+}
+
+.exercise-item h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.exercise-item p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.exercise-item button {
+    background-color: #5c6bc0;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+

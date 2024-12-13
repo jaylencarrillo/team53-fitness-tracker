@@ -61,3 +61,16 @@ function generateWorkouts() {
         workoutDiv.innerHTML = '<p>Error fetching workouts. Please try again later.</p>';
     });
 }
+function displayExercise(workoutDiv, exercise) {
+    const exerciseDiv = document.createElement('div');
+    exerciseDiv.classList.add('exercise-item');
+
+    // Build the exercise details
+    exerciseDiv.innerHTML = `
+        <h3>${exercise.name}</h3>
+        <p>${exercise.description || 'No description available.'}</p>
+        <button onclick="startExercise('${exercise.name}')">Start Exercise</button>
+    `;
+
+    workoutDiv.appendChild(exerciseDiv);
+}
