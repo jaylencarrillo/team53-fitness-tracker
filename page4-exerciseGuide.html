@@ -1,50 +1,104 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Exercise Guide</title>
-        <link rel="stylesheet">
-
-    </head>
-    <body>    
-        <header>
+<head>
+    <title>Exercise Guide</title>
+    <link rel="stylesheet" href="styleExerciseGuide.css"> 
+</head>
+<body>    
+    <header>
         <nav>
             <ul>
                 <li><a href="page1-home.html">Home</a></li>
                 <li><a href="page2-about.html">About</a></li>
                 <li><a href="page3-nutrition.html">Nutrition</a></li>
                 <li><a href="page4-exerciseGuide.html">Exercise Guide</a></li>
+                <li><a href="page5-calendar.html">Progress Tracker</a></li>
             </ul>
         </nav>
     </header>
 
-        <h1>Customize Your Workout Guide by Muscle Group</h1>
+    <h1>Customize Your Workout Guide by Muscle Group</h1>
 
-        <form id="workout-form">
-            <!-- Muscle Group Selection -->
-            <label>Muscle Group (Choose up to 2):</label><br>
-            <input type="checkbox" name="muscle-group" value="chest"> Chest<br>
-            <input type="checkbox" name="muscle-group" value="back"> Back<br>
-            <input type="checkbox" name="muscle-group" value="arms"> Arms<br>
-            <input type="checkbox" name="muscle-group" value="legs"> Legs<br>
-            <input type="checkbox" name="muscle-group" value="core"> Core<br>
-            <input type="checkbox" name="muscle-group" value="shoulders"> Shoulders<br>
-            <input type="checkbox" name="muscle-group" value="full-body"> Full Body<br>
+    <form id="workout-form">
+        <!-- Muscle Group Selection -->
+        <label>Muscle Groups:</label><br>
+        <input type="checkbox" name="muscle-group" value="chest"> Chest<br>
+        <input type="checkbox" name="muscle-group" value="back"> Back<br>
+        <input type="checkbox" name="muscle-group" value="arms"> Arms<br>
+        <input type="checkbox" name="muscle-group" value="legs"> Legs<br>
+        <input type="checkbox" name="muscle-group" value="core"> Core<br>
+        <input type="checkbox" name="muscle-group" value="shoulders"> Shoulders<br>
+        <input type="checkbox" name="muscle-group" value="full-body"> Full Body<br>
 
-            <br>
+        <br><br>
+        
+        <button type="button" onclick="generateWorkouts()">Get Workout</button>
+    </form>
 
-            <!-- Intensity Level Selection -->
-            <label for="intensity">Workout Intensity:</label>
-            <select id="intensity" name="intensity" required>
-                <option value="intensive">Intensive</option>
-                <option value="not-intensive">Not Intensive</option>
-            </select>
+    <div id="workout"></div> 
 
-            <br><br>
-         
-            <button type="button" onclick="generateWorkouts()">Get Workout</button>
-        </form>
+    <script>
+        // This waits for the page to load then it runs the function 
+        document.addEventListener('DOMContentLoaded', function() {
+            // Once it loads, it adds an event listener to the "Get Workout" button
+            document.querySelector('button').addEventListener('click', generateWorkouts);
+        });
 
-        <div id="workout"></div> 
-        <script src="workoutAPI.js"></script>        
-    </body>
+        // This defines the function generateWorkouts which fetches exercises based on selected workout
+        function generateWorkouts() {
+            // Creates an empty array called selectedMuscles
+            let selectedMuscles = [];
+
+            // Checks chosen muscle groups
+            document.querySelectorAll('input[name="muscle-group"]:checked').forEach(function(checkbox) {
+                // Pushes the muscle group into the array
+                selectedMuscles.push(checkbox.value);
+            });
+
+            // Checks if the select is empty and sends a message
+            if (selectedMuscles.length === 0) {
+                alert('Choose a muscle group');
+                return;
+            }
+
+            // Gets HTML element with the ID
+            const workoutDiv = document.getElementById('workout');
+            workoutDiv.style.display = 'block';
+            workoutDiv.innerHTML = '<p> Loading exercises ....</p>';
+
+            // Makes the API call
+            fetch(`https://wger.de/api/v2/exercise/?muscles=${selectedMuscles.join(',')}&language=2`, {
+                headers: {
+                    'Authorization': '2ece34001acf803d853b48459bbb8c8194034207'
+                }
+            })
+            // Processes the API response and turns it into a JSON object
+            .then(response => response.json())
+            .then(data => {
+                // Clears the workout div
+                workoutDiv.innerHTML = '';
+
+                // If no exercises are found, show a message
+                if (data.results.length === 0) {
+                    workoutDiv.innerHTML = '<p> No exercises match criteria</p>';
+                } else {
+                    // If there are matching exercises, display them
+                    data.results.forEach(function(exercise) {
+                        let exerciseDiv = document.createElement('div');
+                        exerciseDiv.classList.add('exercise-item');
+                        exerciseDiv.innerHTML = `
+                            <h3>${exercise.name}</h3>
+                            <p>${exercise.description || 'No description available.'}</p>
+                        `;
+                        workoutDiv.appendChild(exerciseDiv);
+                    });
+                }
+            })
+            // Runs if there is an error
+            .catch(function(error) {
+                console.error('Error:', error);
+                workoutDiv.innerHTML = '<p>Error fetching workouts. Please try again later.</p>';
+            });
+        }
+    </script>
+</body>
 </html>
