@@ -37,30 +37,22 @@
     <div id="workout"></div> 
 
     <script>
-        // This waits for the page to load then it runs the function 
         document.addEventListener('DOMContentLoaded', function() {
-            // Once it loads, it adds an event listener to the "Get Workout" button
             document.querySelector('button').addEventListener('click', generateWorkouts);
         });
 
-        // This defines the function generateWorkouts which fetches exercises based on selected workout
         function generateWorkouts() {
-            // Creates an empty array called selectedMuscles
             let selectedMuscles = [];
 
-            // Checks chosen muscle groups
             document.querySelectorAll('input[name="muscle-group"]:checked').forEach(function(checkbox) {
-                // Pushes the muscle group into the array
                 selectedMuscles.push(checkbox.value);
             });
 
-            // Checks if the select is empty and sends a message
             if (selectedMuscles.length === 0) {
                 alert('Choose a muscle group');
                 return;
             }
 
-            // Gets HTML element with the ID
             const workoutDiv = document.getElementById('workout');
             workoutDiv.style.display = 'block';
             workoutDiv.innerHTML = '<p> Loading exercises ....</p>';
@@ -71,10 +63,8 @@
                     'Authorization': '2ece34001acf803d853b48459bbb8c8194034207'
                 }
             })
-            // Processes the API response and turns it into a JSON object
             .then(response => response.json())
             .then(data => {
-                // Clears the workout div
                 workoutDiv.innerHTML = '';
 
                 // If no exercises are found, show a message
@@ -93,11 +83,6 @@
                     });
                 }
             })
-            // Runs if there is an error
-            .catch(function(error) {
-                console.error('Error:', error);
-                workoutDiv.innerHTML = '<p>Error fetching workouts. Please try again later.</p>';
-            });
         }
     </script>
 </body>
