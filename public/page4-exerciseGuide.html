@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <title>Exercise Guide</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>    
+    <header>
+        <nav>
+            <ul>
+                <li><a href="page1-home.html">Home</a></li>
+                <li><a href="page2-about.html">About</a></li>
+                <li><a href="page3-nutrition.html">Nutrition</a></li>
+                <li><a href="page4-exerciseGuide.html">Exercise Guide</a></li>
+                <li><a href="page5-calendar.html">Progress Tracker</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Customize Your Workout Guide by Muscle Group</h1>
+
+    <form id="workout-form">
+        <!-- Muscle Group Selection -->
+        <label>Muscle Groups:</label><br>
+        <input type="checkbox" name="muscle-group" value="chest"> Chest<br>
+        <input type="checkbox" name="muscle-group" value="back"> Back<br>
+        <input type="checkbox" name="muscle-group" value="arms"> Arms<br>
+        <input type="checkbox" name="muscle-group" value="legs"> Legs<br>
+        <input type="checkbox" name="muscle-group" value="core"> Core<br>
+        <input type="checkbox" name="muscle-group" value="shoulders"> Shoulders<br>
+        <input type="checkbox" name="muscle-group" value="full-body"> Full Body<br>
+
+        <br><br>
+        
+        <button type="button" id="generateWorkoutButton">Get Workout</button>
+    </form>
+
+    <div id="workout"></div> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="workoutAPI.js"></script>
+
+</body>
+</html>
