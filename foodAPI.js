@@ -1,3 +1,10 @@
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.26.0/dist/supabase.min.js';
+
+
+const supabaseUrl = 'https://fvwozyawtwcbjmfrvtud.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2d296eWF3dHdjYmptZnJ2dHVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5NzIzOTUsImV4cCI6MjA0OTU0ODM5NX0.4VcT03AbhrRvGmop2i2ZdHuhcSsnAMCL5hgXvIAPCxE'
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 //API ID and key
 const apId = '0e33c42a';
 const apKey = '87ae8d8cc6004ba4a9333c050357fd61';
@@ -8,70 +15,84 @@ document.getElementById('searchButton').addEventListener('click',searchFood);
 //Calorie Counter 
 let totalCalories = 0;
 
-//Gets the value for the food
-function searchFood(){
-    const foodItem = document.getElementById('food-name').value;
+// Event listener for the search button
+document.getElementById('searchButton').addEventListener('click', searchFood);
 
-    //Post request to the Nutritionix API
-    fetch(`https://trackapi.nutritionix.com/v2/natural/nutrients`,{
+// Save food to Supabase
+async function saveFoodToDB(food) {
+    const { data, error } = await supabase
+        .from('nutrition')
+        .insert([
+            { 
+                food_name: food.food_name, 
+                calories: food.nf_calories 
+            }
+        ]);
+
+    if (error) {
+        console.error('Error saving food:', error);
+    } else {
+        console.log('Food saved to database:', data);
+    }
+}
+
+// Search for food using Nutritionix API
+function searchFood() {
+    const foodItem = document.getElementById('food-name').value.trim();
+
+    if (!foodItem) {
+        alert('Please enter a food item.');
+        return;
+    }
+
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '<p>Loading...</p>';
+
+    fetch(`https://trackapi.nutritionix.com/v2/natural/nutrients`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'x-app-id': apId,
             'x-app-key': apKey,
         },
-
-        //sends food query as a JSON object to API
-        body: JSON.stringify({ query: foodItem}),
+        body: JSON.stringify({ query: foodItem }),
     })
-
-    //Processes the API response and turns it to a JSON 
     .then(response => response.json())
-
-    //Excutes with Data
-    .then(data =>{
-
-        //Function is rendered on to the page
+    .then(data => {
+        resultsDiv.innerHTML = ''; // Clear loading text
         displayResults(data.foods);
     })
-
-    //Logs error
-    .catch(console.error('Error',error));
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        resultsDiv.innerHTML = '<p>Error fetching data. Please try again.</p>';
+    });
 }
 
-//retrieves the div and is displayed
-function displayResults(foods){
+// Display search results and add "Add to Meal" functionality
+function displayResults(foods) {
     const resultsDiv = document.getElementById('results');
-
-    //clears 
     resultsDiv.innerHTML = '';
 
-    foods.forEach(food => {
+    foods.forEach(async (food) => {
+        await saveFoodToDB(food);
 
-        //Create new div
         const foodDiv = document.createElement('div');
         foodDiv.classList.add('food-item');
-
-        //Sets the inner html content and adds food name and calories  
-        foodDiv.innerHTML = ` 
-        <p>
-        <strong>${food.food_name}</strong>: ${food.nf_calories} calories
-        </p>
-        <button onclick="addCalories(${food.nf_calories})">Add to Meal</button>
+        foodDiv.innerHTML = `
+            <p><strong>${food.food_name}</strong>: ${food.nf_calories} calories</p>
         `;
 
-        //Appends the food div to results and makes it visible
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add to Meal';
+        addButton.addEventListener('click', () => addCalories(food.nf_calories));
+
+        foodDiv.appendChild(addButton);
         resultsDiv.appendChild(foodDiv);
     });
-
 }
 
-//Adds the calories of each food and updates it
-function addCalories(calories){
-
-    //add the calories
+// Add calories to the total
+function addCalories(calories) {
     totalCalories += calories;
-
-    //Updates the calories  everytime a new food is searched
-    document.getElementById('total-calories').textContent = totalCalories;
+    document.getElementById('total-calories').textContent = `${totalCalories} kcal`;
 }
