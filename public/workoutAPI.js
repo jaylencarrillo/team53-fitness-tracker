@@ -65,7 +65,7 @@ async function generateWorkouts() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/generateWorkouts', { // Ensure the correct endpoint
+        const response = await fetch('/generateWorkouts', { // Use relative URL for compatibility with Vercel
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

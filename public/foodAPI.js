@@ -43,7 +43,7 @@ async function searchFood() {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/searchFood', { // Ensure the correct endpoint
+        const response = await fetch('/searchFood', { // Ensure the correct endpoint
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
