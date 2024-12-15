@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Exercise Guide</title>
-    <link rel="stylesheet" href="style.css"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App - Exercise Guide</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>    
+<body>
     <header>
         <nav>
             <ul>
@@ -16,28 +19,23 @@
         </nav>
     </header>
 
-    <h1>Customize Your Workout Guide by Muscle Group</h1>
+    <main>
+        <section class="workouts">
+            <h1>Workout Generator</h1>
+            <form>
+                <label>Select Muscle Groups:</label>
+                <div id="muscle-group-container"></div>
+                <button type="button" id="generateButton">Generate Workouts</button>
+            </form>
+            <div id="results"></div>
+        </section>
+    </main>
 
-    <form id="workout-form">
-        <!-- Muscle Group Selection -->
-        <label>Muscle Groups:</label><br>
-        <input type="checkbox" name="muscle-group" value="chest"> Chest<br>
-        <input type="checkbox" name="muscle-group" value="back"> Back<br>
-        <input type="checkbox" name="muscle-group" value="arms"> Arms<br>
-        <input type="checkbox" name="muscle-group" value="legs"> Legs<br>
-        <input type="checkbox" name="muscle-group" value="core"> Core<br>
-        <input type="checkbox" name="muscle-group" value="shoulders"> Shoulders<br>
-        <input type="checkbox" name="muscle-group" value="full-body"> Full Body<br>
-
-        <br><br>
-        
-        <button type="button" id="generateWorkoutButton">Get Workout</button>
-    </form>
-
-    <div id="workout"></div> 
-    
+    <!-- Include Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script type="module" src="workoutAPI.js"></script>
-
+    <script src="workoutAPI.js" type="module"></script>
+    <footer>
+        <p>&copy; 2024 Fitness App</p>
+    </footer>
 </body>
 </html>
