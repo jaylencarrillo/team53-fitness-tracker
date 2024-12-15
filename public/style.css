@@ -315,3 +315,17 @@ form input[type="checkbox"] {
   background-color: #0064bd;
   box-shadow: none;
 }
+
+/* animation for about page */
+.about-page {
+    animation: pulseBackground 8s infinite; /* Apply pulse animation only on About page */
+}
+
+@keyframes pulseBackground {
+    0% {
+        background-color: #f4f4f4; /* Starting color */
+    }
+    100% {
+        background-color: #9bc0e0; /* Ending color */
+    }
+}
