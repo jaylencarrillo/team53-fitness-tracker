@@ -42,8 +42,10 @@ async function searchFood() {
         return;
     }
 
+    const host = window.location.origin; // Use window.location.origin to get the base URL
+
     try {
-        const response = await fetch('/searchFood', { // Ensure the correct endpoint
+        const response = await fetch(`${host}/searchFood`, { // Use dynamic base URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
