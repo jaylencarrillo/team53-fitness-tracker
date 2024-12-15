@@ -56,19 +56,6 @@ main {
     font-size: 1.2rem;
 }
 
-.cta-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
-}
-
 .tutorials {
     margin-top: 30px;
 }
@@ -76,7 +63,7 @@ main {
 .video-tutorials {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; /* Allow wrapping if there's not enough space */
+    flex-wrap: wrap;
 }
 
 .video-card {
@@ -86,8 +73,8 @@ main {
     width: 30%;
     border-radius: 5px;
     display: flex;
-    flex-direction: column; /* Stack iframe and link vertically */
-    align-items: center; /* Center content horizontally */
+    flex-direction: column; 
+    align-items: center;
 }
 
 .video-card:hover {
@@ -96,8 +83,8 @@ main {
 
 .video-card iframe {
     width: 100%;
-    height: 315px; /* Adjust the height as needed */
-    margin-bottom: 10px; /* Space between video and link */
+    height: 315px; 
+    margin-bottom: 10px; 
 }
 
 .video-card a {
@@ -156,20 +143,6 @@ form input[type="checkbox"] {
     margin-right: 10px;
 }
 
-.cta-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
-}
-
 .workout-plan h2 {
     font-size: 1.8rem;
     margin-bottom: 15px;
@@ -208,19 +181,6 @@ form input[type="checkbox"] {
 .workout-plan ul li {
     margin: 10px 0;
     font-size: 1.2rem;
-}
-
-.cta-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
 }
 
 .tutorials {
@@ -279,6 +239,7 @@ form input[type="checkbox"] {
     gap: 20px;
 }
 
+/*
 .exercise-item {
     background-color: whitesmoke;
     padding: 15px;
@@ -312,6 +273,7 @@ form input[type="checkbox"] {
     cursor: pointer;
     margin-top: 15px;
 }
+*/
 
 /* CSS */
 .button-7 {
