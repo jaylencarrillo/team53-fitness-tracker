@@ -64,8 +64,10 @@ async function generateWorkouts() {
         return;
     }
 
+    const host = window.location.origin; // Use window.location.origin to get the base URL
+
     try {
-        const response = await fetch('/generateWorkouts', { // Use relative URL for compatibility with Vercel
+        const response = await fetch(`${host}/generateWorkouts`, { // Use dynamic base URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
