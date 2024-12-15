@@ -21,9 +21,11 @@ const apKey = '87ae8d8cc6004ba4a9333c050357fd61';
 app.use(bodyParser.json());
 app.use(cors()); // Enable CORS
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Serve the main page
 app.get('/searchFood', (req, res) => {
+    res.sendFile('public/page1-home.html', { root: __dirname });
+});
+// Serve the main page
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'page3-nutrition.html'));
 });
 
