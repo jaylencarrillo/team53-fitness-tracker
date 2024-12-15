@@ -26,7 +26,7 @@ app.get('/searchFood', (req, res) => {
 });
 // Serve the main page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'page3-nutrition.html'));
+    res.sendFile(path.join(__dirname, 'public', 'page1-home.html'));
 });
 
 // Endpoint to search for food
