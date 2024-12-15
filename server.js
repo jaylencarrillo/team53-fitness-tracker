@@ -49,25 +49,30 @@ app.post('/searchFood', async (req, res) => {
         if (data.foods && data.foods.length) {
             res.json(data.foods);
         } else {
-            res.status(404).send('No food items found.');
+            res.status(404).json({ error: 'No food items found.' });
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        res.status(500).send('Error fetching food data.');
+        res.status(500).json({ error: 'Error fetching food data.' });
     }
+});
+
+// Serve the workout page
+app.get('/generateWorkouts', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page4-exerciseGuide.html'));
 });
 
 // Route for generating workout exercises
 app.post('/generateWorkouts', async (req, res) => {
     const selectedMuscles = req.body.selectedMuscles;
     if (!selectedMuscles || selectedMuscles.length === 0) {
-        return res.status(400).send('Please select at least one muscle group.');
+        return res.status(400).json({ error: 'Please select at least one muscle group.' });
     }
 
     try {
         const response = await fetch(`https://wger.de/api/v2/exercise/?muscles=${selectedMuscles.join(',')}&language=2`, {
             headers: {
-                'Authorization': 'Bearer 2ece34001acf803d853b48459bbb8c8194034207',
+                'Authorization': '2ece34001acf803d853b48459bbb8c8194034207',
             },
         });
 
@@ -75,11 +80,11 @@ app.post('/generateWorkouts', async (req, res) => {
         if (data.results && data.results.length) {
             res.json(data.results);
         } else {
-            res.status(404).send('No exercises found.');
+            res.status(404).json({ error: 'No exercises found.' });
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        res.status(500).send('Error fetching workout data.');
+        res.status(500).json({ error: 'Error fetching workout data.' });
     }
 });
 
