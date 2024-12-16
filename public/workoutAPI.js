@@ -103,7 +103,6 @@ async function generateWorkouts() {
 
                 resultsContainer.appendChild(workoutElement);
             });
-            alert('Workouts generated and saved.');
         } else {
             alert(data.error || 'No workouts found.');
         }

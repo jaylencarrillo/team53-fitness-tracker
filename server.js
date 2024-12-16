@@ -28,7 +28,10 @@ app.get('/searchFood', (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'page1-home.html'));
 });
-
+// Server food page
+app.get('/searchFood', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page3-nutrition.html'));
+});
 // Endpoint to search for food
 app.post('/searchFood', async (req, res) => {
     const foodItem = req.body.foodItem;
