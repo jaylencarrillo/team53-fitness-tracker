@@ -1,9 +1,9 @@
 const express = require('express');
-const fetch = require('node-fetch'); // Ensure this is correctly imported
+const fetch = require('node-fetch');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors'); 
 
 const app = express();
 const port = process.env.PORT || 3000; 
@@ -19,7 +19,7 @@ const apKey = '87ae8d8cc6004ba4a9333c050357fd61';
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
-app.use(cors()); // Enable CORS
+app.use(cors()); 
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/searchFood', (req, res) => {
     res.sendFile('public/page1-home.html', { root: __dirname });

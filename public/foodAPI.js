@@ -42,10 +42,10 @@ async function searchFood() {
         return;
     }
 
-    const host = window.location.origin; // Use window.location.origin to get the base URL
+    const host = window.location.origin; 
 
     try {
-        const response = await fetch(`${host}/searchFood`, { // Use dynamic base URL
+        const response = await fetch(`${host}/searchFood`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

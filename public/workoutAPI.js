@@ -11,9 +11,9 @@ document.getElementById('generateButton').addEventListener('click', generateWork
 
 // Function to save workout to Supabase
 async function saveWorkoutToDB(workout) {
-    console.log('Saving workout to DB:', workout); // Add this line to inspect the workout object
+    console.log('Saving workout to DB:', workout); 
     const { data, error } = await supabase
-        .from('Exercise') // Ensure the correct table name
+        .from('Exercise') 
         .insert([
             { 
                 exercise_name: workout.name, 
@@ -64,10 +64,10 @@ async function generateWorkouts() {
         return;
     }
 
-    const host = window.location.origin; // Use window.location.origin to get the base URL
+    const host = window.location.origin; 
 
     try {
-        const response = await fetch(`${host}/generateWorkouts`, { // Use dynamic base URL
+        const response = await fetch(`${host}/generateWorkouts`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,10 +78,10 @@ async function generateWorkouts() {
         const data = await response.json();
         if (response.ok) {
             const resultsContainer = document.getElementById('results');
-            resultsContainer.innerHTML = ''; // Clear previous results
+            resultsContainer.innerHTML = ''; 
 
             data.forEach(workout => {
-                console.log('Workout:', workout); // Add this line to inspect the workout object
+                console.log('Workout:', workout);
                 saveWorkoutToDB({
                     name: workout.name,
                     description: workout.description,
