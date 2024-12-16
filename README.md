@@ -19,19 +19,6 @@ Fitness Buddy works on:
 
 # Fitness Buddy App Developer Manual
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Project Structure](#project-structure)
-3. [Setup and Installation](#setup-and-installation)
-4. [Running the Application Locally](#running-the-application-locally)
-5. [Running Tests](#running-tests)
-6. [API Documentation](#api-documentation)
-7. [Known Bugs](#known-bugs)
-8. [Future Development Roadmap](#future-development-roadmap)
-9. [Troubleshooting](#troubleshooting)
-
----
-
 ## Introduction
 
 This document provides detailed instructions for setting up, running, and developing the Fitness Tracker App. It also includes the API documentation, known issues, and a roadmap for future development. This guide assumes the developer has knowledge of web applications and the relevant technical stack but does not have prior knowledge of this specific project.
