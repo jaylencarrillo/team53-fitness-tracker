@@ -10,20 +10,21 @@ const supabaseUrl = 'https://fvwozyawtwcbjmfrvtud.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2d296eWF3dHdjYmptZnJ2dHVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5NzIzOTUsImV4cCI6MjA0OTU0ODM5NX0.4VcT03AbhrRvGmop2i2ZdHuhcSsnAMCL5hgXvIAPCxE';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Adds an event listener to the search button
-document.getElementById('searchButton').addEventListener('click', searchFood);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('searchButton').addEventListener('click', searchFood);
+});
 
 // Calorie Counter 
 let totalCalories = 0;
 
 // Save food to Supabase
 async function saveFoodToDB(food) {
+    console.log('Saving food to DB:', food); 
     const { data, error } = await supabase
         .from('Nutrition')
         .insert([
             { 
-                food_name: food.food_name, 
-                calories: food.nf_calories 
+                food_name: food.food_name
             }
         ]);
 
